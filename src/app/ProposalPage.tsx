@@ -8,7 +8,6 @@ import { useSearchParams } from "next/navigation";
 const FallingLeaves = dynamic(() => import("./components/FallingLeaves"), {
   ssr: false,
 });
-
 export default function ProposalPage() {
   const [showQuestion, setShowQuestion] = useState(false);
   const [showTema, setShowTema] = useState(false);
