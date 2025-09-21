@@ -8,7 +8,7 @@ Sebuah aplikasi web interaktif yang unik untuk menyatakan perasaan dengan cara y
 
 1.  **Akses Proyek:** Buka aplikasi web dengan menambahkan nama orang yang Anda tuju di akhir URL.
 
-    Contoh: `https://my-proposal-project.vercel.app/?name=Sarah`
+    Contoh: `https://my-proposal-project.vercel.app/?name=Anjani`
 
 2.  **Interaksi:** Halaman akan menampilkan pesan pembuka dengan animasi daun gugur.
 
