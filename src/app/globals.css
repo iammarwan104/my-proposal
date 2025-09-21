@@ -1,0 +1,94 @@
+/* @tailwind base;
+@tailwind components; */
+@tailwind utilities;
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* src/app/globals.css *
+
+/* Animasi Daun Jatuh */
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) translateX(0) rotateZ(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(105vh) translateX(20px) rotateZ(720deg); /* Jatuh ke bawah viewport */
+    opacity: 0;
+  }
+}
+
+/* Animasi Goyang Daun (opsional, untuk sentuhan lebih) */
+@keyframes sway {
+  0% { transform: translateX(0) rotate(0deg); }
+  25% { transform: translateX(5px) rotate(5deg); }
+  50% { transform: translateX(0) rotate(0deg); }
+  75% { transform: translateX(-5px) rotate(-5deg); }
+  100% { transform: translateX(0) rotate(0deg); }
+}
+
+
+.leaf-item {
+  position: fixed; /* Penting agar daun tidak mengganggu layout */
+  top: -10%; /* Mulai dari atas layar */
+  z-index: -1; /* Di belakang konten utama */
+  animation-name: fall, sway; /* Gabungkan animasi jatuh dan goyang */
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; /* Untuk animasi jatuh */
+  animation-duration: 10s; /* Durasi default */
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+}
+
+/* Penyesuaian untuk animasi sway agar tidak mengganggu fall */
+.leaf-item {
+  animation: 
+    fall var(--fall-duration, 10s) linear infinite,
+    sway var(--sway-duration, 3s) ease-in-out infinite alternate; /* Tambahkan durasi sway */
+}
+
+/* Warna daun bisa disesuaikan */
+.leaf-item:nth-child(3n) { background-color: #8BC34A; } /* Hijau lebih muda */
+.leaf-item:nth-child(5n) { background-color: #4CAF50; } /* Hijau standar */
+.leaf-item:nth-child(7n) { background-color: #A3E4D7; } /* Hijau kebiruan */
+.leaf-item:nth-child(2n) { background-color: #7CB342; } /* Hijau gelap */
+
+/* Untuk bentuk daun yang lebih realistis, Anda bisa menggunakan SVG atau gambar latar.
+   Untuk contoh ini kita pakai rounded-full sebagai bentuk dasar.
+   Jika ingin bentuk daun lebih kompleks dengan CSS:
+   .leaf-item::before, .leaf-item::after {
+       content: '';
+       position: absolute;
+       background-color: inherit;
+       border-radius: 50%;
+   }
+   .leaf-item::before { top: -20%; left: 20%; width: 80%; height: 80%; }
+   .leaf-item::after { top: 20%; left: -20%; width: 80%; height: 80%; }
+*/
