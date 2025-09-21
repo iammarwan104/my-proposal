@@ -1,9 +1,9 @@
 'use client';
 
 import { useCallback, useMemo } from 'react';
-import Particles from 'react-particles';
-import { loadSlim } from 'tsparticles-slim'; // Menggunakan loadSlim untuk mengurangi ukuran bundle
-import type { Engine, IOptions } from 'tsparticles-engine';
+import Particles from '@tsparticles/react';
+import { loadSlim } from '@tsparticles/slim'; // Menggunakan loadSlim untuk mengurangi ukuran bundle
+import type { Engine, IOptions, RecursivePartial } from '@tsparticles/engine';
 
 const LeafParticles = () => {
   const particlesInit = useCallback(async (engine: Engine) => {
@@ -11,7 +11,7 @@ const LeafParticles = () => {
     await loadSlim(engine);
   }, []);
 
-  const options: IOptions = useMemo(() => ({
+  const options: RecursivePartial<IOptions> = useMemo(() => ({
     particles: {
       number: {
         value: 30, // Jumlah daun
