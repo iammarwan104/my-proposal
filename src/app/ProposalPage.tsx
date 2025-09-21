@@ -69,11 +69,15 @@ export default function ProposalPage() {
             finalMessage
           ) : (
             <>
-              {name.length === 0 ? "" : `Halo ${name},`}
-              <br />
-              {showQuestion
-                ? "Maukigah jadi pacarku?"
-                : "Ada yang mau ku tanyakan ki..."}
+              {showQuestion ? (
+                "Maukigah jadi pacarku?"
+              ) : (
+                <>
+                  {name.length === 0 ? "" : `Halo ${name},`}
+                  <br />
+                  Ada yang mau ku tanyakan ki...
+                </>
+              )}
             </>
           )}
         </h1>
@@ -105,9 +109,16 @@ export default function ProposalPage() {
         )}
         {showTema
           ? ""
-          : touchCount > 3 && (
+          : touchCount === 3 && (
               <div className="mt-8 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-                Tidak mau i diganggu tombol "Tidak", tombol "iya" nah saja!
+                Tidak mau i diganggu tombol "Tidak", tombol "iya" na saja nah!
+              </div>
+            )}
+            {showTema
+          ? ""
+          : touchCount > 4 && (
+              <div className="mt-8 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                Bilang mmg ka tidak mau i nah, tombol "iya" na saja nah!
               </div>
             )}
       </div>
