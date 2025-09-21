@@ -18,7 +18,7 @@ export default function ProposalPage() {
 
   // Mengambil nama dari query parameter URL
   const searchParams = useSearchParams();
-  const name = searchParams.get("name") || "seseorang";
+  const name = searchParams.get("name") || "";
 
   const moveButton = () => {
     const maxX = window.innerWidth - 150;
@@ -73,8 +73,8 @@ export default function ProposalPage() {
               {`Halo ${name},`}
               <br />
               {showQuestion
-                ? "Apakah kamu mau menjadi pacar saya?"
-                : "Ada yang mau saya tanyakan..."}
+                ? "Maukigah jadi pacarku?"
+                : "Ada yang mau ku tanyakan ki..."}
             </>
           )}
         </h1>
@@ -82,7 +82,7 @@ export default function ProposalPage() {
           <button
             onClick={() => setShowQuestion(true)}
             className="bg-green-500 text-white font-bold py-3 px-6 rounded-full text-lg animate-pulse hover:bg-green-600 transition-colors">
-            {isMoved ? "Ya, saya siap!" : "Klik ini kalau berani!"}
+            {isMoved ? "Ya, saya siap!" : "Iya, Apa?"}
           </button>
         ) : (
           <div className="flex space-x-4">
@@ -104,9 +104,9 @@ export default function ProposalPage() {
             </button>
           </div>
         )}
-        {touchCount > 3 && (
+        {showTema ? "" : touchCount > 3 && (
           <div className="mt-8 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-            Tombol ini butuh liburan.
+            Tidak mau i diganggu tombol "Tidak".
           </div>
         )}
       </div>
