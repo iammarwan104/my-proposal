@@ -1,36 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Proyek "My Proposal"
 
-## Getting Started
+Sebuah aplikasi web interaktif yang unik untuk menyatakan perasaan dengan cara yang out of the box.
 
-First, run the development server:
+-----
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+### Cara Penggunaan
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1.  **Akses Proyek:** Buka aplikasi web dengan menambahkan nama orang yang Anda tuju di akhir URL.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+    Contoh: `https://my-proposal-project.vercel.app/?name=Sarah`
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2.  **Interaksi:** Halaman akan menampilkan pesan pembuka dengan animasi daun gugur.
 
-## Learn More
+3.  **Pertanyaan:** Klik tombol yang bergerak untuk mengungkapkan pertanyaan, dan animasi salju akan muncul.
 
-To learn more about Next.js, take a look at the following resources:
+4.  **Menghindari:** Tombol "Tidak" dirancang untuk selalu bergeser, sehingga tidak bisa diklik.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5.  **Jawaban:** Ketika tombol "Iya" ditekan, teks di halaman akan berubah menjadi pesan manis yang telah Anda siapkan.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+-----
 
-## Deploy on Vercel
+### Deskripsi Proyek
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Proyek "My Proposal" adalah inisiatif web personal yang dirancang untuk menyampaikan perasaan dengan cara yang inovatif dan interaktif. Tujuannya adalah hiburan semata
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+-----
+
+### Fitur
+
+  * **Pesan Personal:** Mengambil nama yang dituju dari URL untuk membuat pesan yang dipersonalisasi.
+  * **Animasi Interaktif:** Transisi animasi dari daun gugur ke salju, lalu ke animasi akhir saat "Iya" ditekan.
+  * **Tombol "Menghindar":** Tombol "Tidak" yang selalu bergeser, mencegahnya untuk diklik, menambahkan sentuhan humor.
+  * **Responsif:** Dirancang untuk berfungsi dengan baik di perangkat desktop maupun seluler.
+
+-----
+
+### Teknologi yang Digunakan
+
+  * **Next.js 15**: Kerangka kerja React untuk aplikasi web yang modern.
+  * **JavaScript & TypeScript**: Bahasa pemrograman utama yang digunakan untuk membangun fungsionalitas.
+  * **React**: Pustaka untuk membangun antarmuka pengguna.
+  * **Tailwind CSS**: Kerangka kerja CSS untuk *styling* yang cepat dan efisien.
+  * **react-confetti**: Pustaka untuk membuat animasi partikel yang dinamis (digunakan untuk efek daun dan animasi akhir).
+  * **react-snowfall**: Pustaka khusus untuk animasi salju.
+  * **Vercel**: Platform untuk *deployment* yang mudah dan cepat.
+
+-----
+
+### Panduan Instalasi dan Deployment
+
+Untuk menjalankan proyek ini di lingkungan lokal atau mengembangkannya:
+
+1.  **Clone repositori:**
+
+    ```bash
+    git clone https://github.com/USERNAME/REPO_NAME.git
+    cd REPO_NAME
+    ```
+
+    *(Ganti `USERNAME` dan `REPO_NAME` dengan detail repositori Anda.)*
+
+2.  **Instal dependensi:**
+
+    ```bash
+    npm install
+    ```
+
+3.  **Jalankan aplikasi:**
+
+    ```bash
+    npm run dev
+    ```
+
+Aplikasi akan berjalan di `http://localhost:3000`.
+
+-----
+
+### Kontribusi
+
+Proyek ini dibuat untuk tujuan pribadi, tetapi jika ada ide atau perbaikan yang ingin Anda sarankan, silakan hubungi saya.
+
+**Dibuat dengan oleh Marwan**
