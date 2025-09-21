@@ -1,4 +1,4 @@
-'''"use client";
+"use client";
 
 import { useState } from "react";
 import Snowfall from "react-snowfall";
@@ -114,4 +114,3 @@ export default function ProposalPage() {
     </div>
   );
 }
-'''
