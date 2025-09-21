@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Snowfall from "react-snowfall";
 import dynamic from "next/dynamic";
 import { useSearchParams } from "next/navigation";
@@ -8,17 +8,76 @@ import { useSearchParams } from "next/navigation";
 const FallingLeaves = dynamic(() => import("./components/FallingLeaves"), {
   ssr: false,
 });
+
+const PlayIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="w-6 h-6">
+    <path
+      fillRule="evenodd"
+      d="M4.5 5.653c0-1.426 1.529-2.33 2.779-1.643l11.54 6.647c1.295.742 1.295 2.545 0 3.286L7.279 20.99c-1.25.717-2.779-.217-2.779-1.643V5.653z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
+const PauseIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className="w-6 h-6">
+    <path
+      fillRule="evenodd"
+      d="M6.75 5.25a.75.75 0 01.75.75v12a.75.75 0 01-1.5 0v-12a.75.75 0 01.75-.75zm9 0a.75.75 0 01.75.75v12a.75.75 0 01-1.5 0v-12a.75.75 0 01.75-.75z"
+      clipRule="evenodd"
+    />
+  </svg>
+);
+
 export default function ProposalPage() {
   const [showQuestion, setShowQuestion] = useState(false);
   const [showTema, setShowTema] = useState(false);
   const [noButtonPosition, setNoButtonPosition] = useState({ top: 0, left: 0 });
   const [isMoved, setIsMoved] = useState(false);
   const [touchCount, setTouchCount] = useState(0);
-  const [finalMessage, setFinalMessage] = useState(""); // State baru untuk pesan akhir
+  const [finalMessage, setFinalMessage] = useState("");
+  const [isPlaying, setIsPlaying] = useState(true);
 
-  // Mengambil nama dari query parameter URL
+  const audioRef = useRef<HTMLAudioElement>(null);
+
   const searchParams = useSearchParams();
   const name = searchParams.get("name") || "";
+
+  useEffect(() => {
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      const playPromise = audioElement.play();
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+          })
+          .catch(() => {
+            setIsPlaying(false);
+          });
+      }
+    }
+  }, []);
+
+  const togglePlayPause = () => {
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      if (isPlaying) {
+        audioElement.pause();
+      } else {
+        audioElement.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   const moveButton = () => {
     const maxX = window.innerWidth - 150;
@@ -32,11 +91,19 @@ export default function ProposalPage() {
 
   const handleYesClick = () => {
     setShowTema(true);
-    setFinalMessage(`Ok ${name} Sayang Love You`); // Mengatur pesan akhir
+    setFinalMessage(`Ok ${name} Sayang Love You`);
   };
 
   return (
-    <div className="relative overflow-hidden min-h-screen">
+    <div
+      className="relative overflow-hidden min-h-screen text-white"
+      style={{
+        backgroundImage: "url(/sunset.jpg)",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}>
+      <div className="absolute inset-0 w-full h-full bg-black/50 z-0" />
+      <audio ref={audioRef} src="/akhirnya-naff.mp3" loop />
       {showTema ? (
         <Snowfall
           color="white"
@@ -45,7 +112,7 @@ export default function ProposalPage() {
             position: "fixed",
             width: "100vw",
             height: "100vh",
-            zIndex: 0,
+            zIndex: 1, // Pastikan salju di atas overlay
             top: 0,
             left: 0,
           }}
@@ -58,7 +125,7 @@ export default function ProposalPage() {
             left: 0,
             width: "100vw",
             height: "100vh",
-            zIndex: -1,
+            zIndex: 1, // Pastikan daun di atas overlay
           }}>
           <FallingLeaves />
         </div>
@@ -69,15 +136,11 @@ export default function ProposalPage() {
             finalMessage
           ) : (
             <>
-              {showQuestion ? (
-                "Maukigah jadi pacarku?"
-              ) : (
-                <>
-                  {name.length === 0 ? "" : `Halo ${name},`}
-                  <br />
-                  Ada yang mau ku tanyakan ki...
-                </>
-              )}
+              
+              {showQuestion
+                ? "Maukigah jadi pacarku?"
+                : (<>{name.length === 0 ? "" : `Halo ${name},`}
+              <br />Ada yang mau ku tanyakan ki...</>)}
             </>
           )}
         </h1>
@@ -107,21 +170,27 @@ export default function ProposalPage() {
             </button>
           </div>
         )}
-        {showTema
+         {showTema
           ? ""
           : touchCount === 3 && (
-              <div className="mt-8 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+              <div className="mt-8 p-4 bg-red-500/80 text-white rounded-lg">
                 Tidak mau i diganggu tombol "Tidak", tombol "iya" na saja nah!
               </div>
             )}
             {showTema
           ? ""
-          : touchCount > 4 && (
-              <div className="mt-8 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-                Bilang mmg ka tidak mau i nah, tombol "iya" na saja nah!
+          : touchCount > 3 && (
+              <div className="mt-8 p-4 bg-red-500/80 text-white rounded-lg">
+                Bilang mmg ka ta tdk mau i, tombol "iya" na saja nah!
               </div>
             )}
       </div>
+      <button
+        onClick={togglePlayPause}
+        className="fixed bottom-5 right-5 bg-white/50 backdrop-blur-md text-gray-800 p-3 rounded-full shadow-lg hover:bg-white/70 transition-colors z-20"
+        aria-label={isPlaying ? "Pause music" : "Play music"}>
+        {isPlaying ? <PauseIcon /> : <PlayIcon />}
+      </button>
     </div>
   );
 }
