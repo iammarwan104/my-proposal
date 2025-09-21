@@ -13,7 +13,7 @@ export default function GeneratePage() {
 
   useEffect(() => {
     if (name) {
-      setGeneratedUrl(`${origin}?name${encodeURIComponent(name)}`);
+      setGeneratedUrl(`${origin}?name=${encodeURIComponent(name)}`);
     } else {
       setGeneratedUrl("");
     }
