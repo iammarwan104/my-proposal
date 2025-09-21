@@ -44,7 +44,7 @@ export default function ProposalPage() {
   const [isMoved, setIsMoved] = useState(false);
   const [touchCount, setTouchCount] = useState(0);
   const [finalMessage, setFinalMessage] = useState("");
-  const [isPlaying, setIsPlaying] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const audioRef = useRef<HTMLAudioElement>(null);
 
