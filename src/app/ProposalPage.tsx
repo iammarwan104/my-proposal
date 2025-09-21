@@ -31,8 +31,7 @@ export default function ProposalPage() {
   };
 
   const handleYesClick = () => {
-
-    setShowTema(true)
+    setShowTema(true);
     setFinalMessage(`Ok ${name} Sayang Love You`); // Mengatur pesan akhir
   };
 
@@ -70,7 +69,7 @@ export default function ProposalPage() {
             finalMessage
           ) : (
             <>
-              {`Halo ${name},`}
+              {name.length === 0 ? "" : `Halo ${name},`}
               <br />
               {showQuestion
                 ? "Maukigah jadi pacarku?"
@@ -104,11 +103,13 @@ export default function ProposalPage() {
             </button>
           </div>
         )}
-        {showTema ? "" : touchCount > 3 && (
-          <div className="mt-8 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
-            Tidak mau i diganggu tombol "Tidak".
-          </div>
-        )}
+        {showTema
+          ? ""
+          : touchCount > 3 && (
+              <div className="mt-8 p-4 bg-red-100 border border-red-400 text-red-700 rounded-lg">
+                Tidak mau i diganggu tombol "Tidak", tombol "iya" nah saja!
+              </div>
+            )}
       </div>
     </div>
   );
